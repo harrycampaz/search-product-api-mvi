@@ -62,4 +62,17 @@ dependencies {
     // Hilt
     implementation "com.google.dagger:hilt-android:2.44"
     kapt "com.google.dagger:hilt-compiler:2.44"
+
+    /**
+     *  Unit Tests
+     **/
+
+    def coroutines_test_version = "1.5.2"
+    def androidXTestVersion = "1.3.0"
+    def mockk_version = "1.12.0"
+    testImplementation 'androidx.arch.core:core-testing:2.1.0'
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_test_version"
+    testImplementation "androidx.test:rules:$androidXTestVersion"
+    testImplementation "io.mockk:mockk-agent-jvm:$mockk_version"
+    testImplementation "io.mockk:mockk:$mockk_version"
 }

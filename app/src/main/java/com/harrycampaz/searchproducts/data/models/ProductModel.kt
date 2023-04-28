@@ -1,4 +1,4 @@
-package com.harrycampaz.searchproducts.data
+package com.harrycampaz.searchproducts.data.models
 
 import com.harrycampaz.searchproducts.domain.entities.ProductEntity
 
@@ -11,7 +11,7 @@ data class ProductModel(
     val title: String,
     val price: Double,
     val thumbnail: String,
-    val available_quantity: Double,
+    val available_quantity: Int,
 )
 
 fun ProductResponse.toListProductEntity(): List<ProductEntity> {
