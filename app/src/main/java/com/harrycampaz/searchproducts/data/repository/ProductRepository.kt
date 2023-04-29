@@ -12,8 +12,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
+import javax.inject.Inject
 
-class ProductRepository(
+class ProductRepository @Inject constructor(
     private val productApi: ProductApi,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : IProductRepository {

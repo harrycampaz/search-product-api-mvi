@@ -1,7 +1,8 @@
-package com.harrycampaz.searchproducts
+package com.harrycampaz.searchproducts.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.harrycampaz.searchproducts.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

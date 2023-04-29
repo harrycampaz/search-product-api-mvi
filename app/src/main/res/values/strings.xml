@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">search products</string>
+    <string name="image_product">Image product</string>
+    <string name="search_product">Buscar articulo</string>
+    <string name="search_button">Buscar</string>
+    <string name="msg_validation">El texto debe tener al menos 3 caracteres</string>
 </resources>

@@ -1,7 +1,7 @@
 package com.harrycampaz.searchproducts.domain.entities
 
 data class ProductEntity(
-    val id: Int,
+    val id: String,
     val title: String,
     val price: Double,
     val thumbnail: String,

@@ -1,8 +1,10 @@
+
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -17,6 +19,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 
     buildTypes {
@@ -75,4 +81,14 @@ dependencies {
     testImplementation "androidx.test:rules:$androidXTestVersion"
     testImplementation "io.mockk:mockk-agent-jvm:$mockk_version"
     testImplementation "io.mockk:mockk:$mockk_version"
+
+
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+
+    def nav_version = "2.5.3"
+    // Kotlin
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
 }
+

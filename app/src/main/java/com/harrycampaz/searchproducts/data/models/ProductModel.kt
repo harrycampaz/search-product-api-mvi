@@ -7,7 +7,7 @@ data class ProductResponse(
 )
 
 data class ProductModel(
-    val id: Int,
+    val id: String,
     val title: String,
     val price: Double,
     val thumbnail: String,

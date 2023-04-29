@@ -3,6 +3,7 @@ package com.harrycampaz.searchproducts.di
 import com.harrycampaz.searchproducts.common.Constants
 import com.harrycampaz.searchproducts.data.network.ProductApi
 import com.harrycampaz.searchproducts.data.repository.ProductRepository
+import com.harrycampaz.searchproducts.domain.repository.IProductRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,7 +20,7 @@ object AppModule {
     @Provides
     fun providerProductRepository(
         productApi: ProductApi
-    ) = ProductRepository(productApi)
+    ): IProductRepository = ProductRepository(productApi)
 
     @Singleton
     @Provides
