@@ -54,9 +54,9 @@ class SearchProductViewModel @Inject constructor(
 
     private fun requestSearchProduct() = viewModelScope.launch {
 
-        useCase.searchProduct(queryText.value).onSuccess { responde ->
+        useCase.searchProduct(queryText.value).onSuccess { response ->
             _searchProductState.emit(SearchProductState.HideLoading)
-            _searchProductState.emit(SearchProductState.NavigateToProductList(responde))
+            _searchProductState.emit(SearchProductState.NavigateToProductList(response))
 
         }.onFailure { error ->
             when (error) {
