@@ -9,7 +9,7 @@ Android Jetpack, Kotlin, MVI in Android, ViewModel, Retrofit, Glide, Navigation 
 
 ## Demo
 
-![git demo](https://imgur.com/a/NcyKfNZ)
+![git demo](https://imgur.com/pu2q5xx.gif)
 
 https://imgur.com/a/NcyKfNZ
 
