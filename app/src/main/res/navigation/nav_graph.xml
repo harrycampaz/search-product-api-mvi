@@ -7,5 +7,28 @@
     <fragment
         android:id="@+id/searchProductFragment"
         android:name="com.harrycampaz.searchproducts.presentation.ui.searchProduct.SearchProductFragment"
-        android:label="SearchProductFragment" />
+        android:label="SearchProductFragment" >
+        <action
+            android:id="@+id/action_searchProductFragment_to_productListFragment"
+            app:destination="@id/productListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productListFragment"
+        android:name="com.harrycampaz.searchproducts.presentation.ui.productList.ProductListFragment"
+        android:label="ProductListFragment" >
+        <argument
+            android:name="list_product"
+            app:argType="com.harrycampaz.searchproducts.presentation.ui.searchProduct.viewobject.ListProductViewObject" />
+        <action
+            android:id="@+id/action_productListFragment_to_detailsProductFragment"
+            app:destination="@id/detailsProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsProductFragment"
+        android:name="com.harrycampaz.searchproducts.presentation.ui.detailsProduct.DetailsProductFragment"
+        android:label="DetailsProductFragment" >
+        <argument
+            android:name="productItem"
+            app:argType="com.harrycampaz.searchproducts.presentation.ui.searchProduct.viewobject.ProductViewObject" />
+    </fragment>
 </navigation>

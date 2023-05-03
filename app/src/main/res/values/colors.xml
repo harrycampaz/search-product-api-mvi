@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background_gray">#C9D4DF</color>
     <color name="text_gray">#63696E</color>
+    <color name="divider_gray">#C8C8C8</color>
     <color name="background">#FFF059</color>
     <color name="btn_color">#2868C7</color>
 </resources>

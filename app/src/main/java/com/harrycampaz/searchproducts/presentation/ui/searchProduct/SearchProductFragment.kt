@@ -13,9 +13,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.harrycampaz.searchproducts.R
 import com.harrycampaz.searchproducts.common.SoftKeyboardHelper
 import com.harrycampaz.searchproducts.databinding.FragmentSearchProductBinding
+import com.harrycampaz.searchproducts.presentation.ui.searchProduct.viewobject.ListProductViewObject
+import com.harrycampaz.searchproducts.presentation.ui.searchProduct.viewobject.toListViewObject
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -75,7 +78,13 @@ class SearchProductFragment : Fragment() {
                         SearchProductState.HideLoading -> hideLoading()
                         SearchProductState.InternetError -> showInternetError()
                         is SearchProductState.NavigateToProductList -> {
-
+                            val action = SearchProductFragmentDirections
+                                .actionSearchProductFragmentToProductListFragment(
+                                    ListProductViewObject(
+                                        state.productList.toListViewObject()
+                                    )
+                                )
+                           findNavController().navigate(action)
                         }
                         SearchProductState.ServerError -> showServerError()
                         SearchProductState.ShowLoading -> showLoading()
@@ -92,8 +101,9 @@ class SearchProductFragment : Fragment() {
     }
 
     private fun hideLoading() {
-        binding.layoutSearchProduct.isVisible = true
+
         binding.progressBarLoading.isVisible = false
+        binding.layoutSearchProduct.isVisible = true
     }
 
     private fun showLoading() {
@@ -105,11 +115,11 @@ class SearchProductFragment : Fragment() {
         Toast.makeText(context, "Internet Error", Toast.LENGTH_SHORT).show()
     }
 
-    private fun showServerError(){
+    private fun showServerError() {
         Toast.makeText(context, "Server Error", Toast.LENGTH_SHORT).show()
     }
 
-    private fun showUnknownError(){
+    private fun showUnknownError() {
         Toast.makeText(context, "Unknown Error", Toast.LENGTH_SHORT).show()
     }
 
