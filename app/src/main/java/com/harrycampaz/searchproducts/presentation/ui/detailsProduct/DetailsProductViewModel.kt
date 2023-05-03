@@ -24,9 +24,7 @@ class DetailsProductViewModel @Inject constructor(): ViewModel() {
     private fun handleIntent() = viewModelScope.launch{
         detailsProductIntent.consumeAsFlow().collectLatest { action ->
             when(action){
-                DetailsProductAction.Idle -> {
-                    _detailsProductState.emit(DetailsProductState.InitView)
-                }
+                DetailsProductAction.NavigateBack -> _detailsProductState.emit(DetailsProductState.GoBack)
             }
         }
     }
@@ -36,11 +34,11 @@ class DetailsProductViewModel @Inject constructor(): ViewModel() {
     }
 
     sealed class DetailsProductState {
-        object InitView : DetailsProductState()
+        object GoBack : DetailsProductState()
     }
 
     sealed class DetailsProductAction {
-        object Idle : DetailsProductAction()
+        object NavigateBack : DetailsProductAction()
     }
 
 }

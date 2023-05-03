@@ -36,6 +36,7 @@ class ProductListViewModel @Inject constructor() : ViewModel() {
                 is ProductListAction.NavigateToDetail -> {
                     _productListState.emit(ProductListState.GoToDetail(action.productViewObject))
                 }
+                ProductListAction.NavigateBack -> _productListState.emit(ProductListState.GoBack)
             }
         }
     }
@@ -51,11 +52,13 @@ class ProductListViewModel @Inject constructor() : ViewModel() {
     sealed class ProductListState {
         object InitView : ProductListState()
         data class GoToDetail(val productViewObject: ProductViewObject) : ProductListState()
+        object GoBack : ProductListState()
     }
 
     sealed class ProductListAction {
         object Idle : ProductListAction()
         data class NavigateToDetail(val productViewObject: ProductViewObject) : ProductListAction()
+        object NavigateBack : ProductListAction()
     }
 
 }

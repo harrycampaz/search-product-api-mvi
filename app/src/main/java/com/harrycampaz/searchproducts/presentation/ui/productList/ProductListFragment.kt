@@ -22,7 +22,7 @@ class ProductListFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: ProductListViewModel by activityViewModels()
 
-    val args: ProductListFragmentArgs by lazy {
+    private val args: ProductListFragmentArgs by lazy {
         ProductListFragmentArgs.fromBundle(requireArguments())
     }
 
@@ -31,9 +31,13 @@ class ProductListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentProductListBinding.inflate(inflater, container, false)
+        _binding = FragmentProductListBinding.inflate(inflater, container, false).also {
+            setupNavigation(it)
+        }
         return binding.root
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -42,12 +46,13 @@ class ProductListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Log.e("TAG", "onViewCreated: ${args.listProduct}.", )
         observerViewModelStates()
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.sendAction(ProductListViewModel.ProductListAction.Idle)
         }
+
     }
+
 
     private fun observerViewModelStates() {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -59,7 +64,16 @@ class ProductListFragment : Fragment() {
                     is ProductListViewModel.ProductListState.GoToDetail -> {
                         navigateToDetailsProduct(state.productViewObject)
                     }
+                    ProductListViewModel.ProductListState.GoBack -> findNavController().navigateUp()
                 }
+            }
+        }
+    }
+
+    private fun setupNavigation(productListBinding: FragmentProductListBinding) {
+        productListBinding.containerNavBarContainer.containerNavIconContainer.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.sendAction(ProductListViewModel.ProductListAction.NavigateBack)
             }
         }
     }

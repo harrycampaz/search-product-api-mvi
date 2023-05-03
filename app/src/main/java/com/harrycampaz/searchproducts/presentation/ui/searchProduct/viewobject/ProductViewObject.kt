@@ -16,7 +16,7 @@ data class ProductViewObject(
     val title: String,
     val price: Double,
     val thumbnail: String,
-    val available_quantity: Int,
+    val availableQuantity: Int,
 ): Parcelable
 
 fun List<ProductEntity>.toListViewObject() = map { it.toViewObject() }
@@ -26,7 +26,7 @@ fun ProductEntity.toViewObject() = ProductViewObject(
     title = title,
     price = price,
     thumbnail = thumbnail,
-    available_quantity = available_quantity)
+    availableQuantity = availableQuantity)
 
 fun ProductViewObject.toItemView() = ProductItemVO(
     title = title,

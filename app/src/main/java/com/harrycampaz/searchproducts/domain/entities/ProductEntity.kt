@@ -5,5 +5,5 @@ data class ProductEntity(
     val title: String,
     val price: Double,
     val thumbnail: String,
-    val available_quantity: Int,
+    val availableQuantity: Int,
 )

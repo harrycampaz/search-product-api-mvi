@@ -10,6 +10,8 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.bumptech.glide.Glide
 import com.harrycampaz.searchproducts.R
+import com.harrycampaz.searchproducts.common.loadImgList
+import com.harrycampaz.searchproducts.common.toPriceFormat
 import com.harrycampaz.searchproducts.databinding.ViewItemProductBinding
 import java.text.NumberFormat
 import java.util.*
@@ -31,14 +33,9 @@ class ProductItemComponent @JvmOverloads constructor(
         format.maximumFractionDigits = 0
 
         binding.labelTitle.text = itemVO.title
-        binding.labelPrice.text = format.format(itemVO.price)
+        binding.labelPrice.text = itemVO.price.toPriceFormat()
         binding.imageProduct.loadImgList(itemVO.thumbnail)
     }
 
 }
 
-fun ImageView.loadImgList(url: String){
-    Glide.with(this)
-        .load(url)
-        .into(this)
-}

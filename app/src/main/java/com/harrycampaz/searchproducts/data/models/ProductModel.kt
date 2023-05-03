@@ -1,5 +1,6 @@
 package com.harrycampaz.searchproducts.data.models
 
+import com.google.gson.annotations.SerializedName
 import com.harrycampaz.searchproducts.domain.entities.ProductEntity
 
 data class ProductResponse(
@@ -11,7 +12,8 @@ data class ProductModel(
     val title: String,
     val price: Double,
     val thumbnail: String,
-    val available_quantity: Int,
+    @SerializedName("available_quantity")
+    val availableQuantity: Int,
 )
 
 fun ProductResponse.toListProductEntity(): List<ProductEntity> {
@@ -21,7 +23,7 @@ fun ProductResponse.toListProductEntity(): List<ProductEntity> {
             title = it.title,
             price = it.price,
             thumbnail = it.thumbnail,
-            available_quantity = it.available_quantity,
+            availableQuantity = it.availableQuantity,
         )
     }
 }

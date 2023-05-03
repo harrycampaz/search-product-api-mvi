@@ -4,4 +4,7 @@
     <string name="search_product">Buscar articulo</string>
     <string name="search_button">Buscar</string>
     <string name="msg_validation">El texto debe tener al menos 3 caracteres</string>
+    <string name="navigate_back">Navigate back</string>
+    <string name="image_description">Image description</string>
+    <string name="label_available_quantity">(%s Disponibles)</string>
 </resources>

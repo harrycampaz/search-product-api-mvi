@@ -66,5 +66,23 @@ class ProductListViewModelTest {
         job.cancel()
     }
 
+    @Test
+    fun `WHEN sent NavigateBack Action THEN emit GoBack State to the View`() = coroutinesTestRule.runTest {
+
+        val eventList = mutableListOf<ProductListViewModel.ProductListState>()
+
+        val job = launch {
+            viewModel.productListState.collectLatest {
+                eventList.add(it)
+            }
+        }
+
+        viewModel.sendAction(ProductListViewModel.ProductListAction.NavigateBack)
+
+        assertTrue(eventList.first() is ProductListViewModel.ProductListState.GoBack)
+
+        job.cancel()
+    }
+
 }
 

@@ -28,4 +28,14 @@
         </item>
         <item name="android:background">@drawable/border_radius_gray</item>
     </style>
+
+    <style name="Base.TextAppearance.searchproduct.Header" parent="Base.TextAppearance.AppCompat.Title">
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="Base.TextAppearance.searchproduct.Body" parent="Base.TextAppearance.AppCompat.SearchResult.Subtitle">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+
 </resources>
