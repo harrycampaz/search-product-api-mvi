@@ -10,4 +10,5 @@ sealed class SearchProductState {
     object InternetError : SearchProductState()
     object ServerError : SearchProductState()
     object UnknownError : SearchProductState()
+    object EmptyList : SearchProductState()
 }

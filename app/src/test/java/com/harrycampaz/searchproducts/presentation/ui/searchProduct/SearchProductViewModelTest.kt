@@ -3,6 +3,7 @@ package com.harrycampaz.searchproducts.presentation.ui.searchProduct
 import com.harrycampaz.searchproducts.common.NetworkException
 import com.harrycampaz.searchproducts.common.ServerException
 import com.harrycampaz.searchproducts.common.UnknownException
+import com.harrycampaz.searchproducts.data.models.ProductResponse
 import com.harrycampaz.searchproducts.domain.entities.ProductEntity
 import com.harrycampaz.searchproducts.domain.usecase.SearchProductUseCase
 import com.harrycampaz.searchproducts.utils.CoroutinesTestRule
@@ -190,6 +191,31 @@ class SearchProductViewModelTest {
         // Then
         assert(eventList.first() is SearchProductState.ShowLoading)
         assert(eventList.last() is SearchProductState.ServerError)
+
+        job.cancel()
+    }
+
+    @Test
+    fun `validateString WHEN return Result EmptyList THEN emit Empty List State`() = coroutinesTestRule.runTest {
+        // Given
+        coEvery { useCase.searchProduct(any()) } returns Result.success(listOf())
+        viewModel.queryText.value = "search query"
+
+        val eventList = mutableListOf<SearchProductState>()
+
+        // When
+
+        val job = launch {
+            viewModel.searchProductState.collectLatest {
+                eventList.add(it)
+            }
+        }
+
+        // When
+        viewModel.sendAction(SearchProductViewModel.SearchProductAction.SendRequest)
+
+        // Then
+        assert(eventList.last() is SearchProductState.EmptyList)
 
         job.cancel()
     }

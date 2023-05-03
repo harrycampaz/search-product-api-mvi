@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.harrycampaz.searchproducts.common.NetworkException
 import com.harrycampaz.searchproducts.common.ServerException
+import com.harrycampaz.searchproducts.domain.entities.ProductEntity
 import com.harrycampaz.searchproducts.domain.usecase.SearchProductUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -55,17 +56,27 @@ class SearchProductViewModel @Inject constructor(
     private fun requestSearchProduct() = viewModelScope.launch {
 
         useCase.searchProduct(queryText.value).onSuccess { response ->
-            _searchProductState.emit(SearchProductState.HideLoading)
-            _searchProductState.emit(SearchProductState.NavigateToProductList(response))
+            handleSuccess(response)
 
         }.onFailure { error ->
-            when (error) {
-                is NetworkException -> _searchProductState.emit(SearchProductState.InternetError)
-                is ServerException -> _searchProductState.emit(SearchProductState.ServerError)
-                else -> _searchProductState.emit(SearchProductState.UnknownError)
-            }
+            handleErrors(error)
         }
     }
+
+    private suspend fun handleErrors(error: Throwable) {
+        when (error) {
+            is NetworkException -> _searchProductState.emit(SearchProductState.InternetError)
+            is ServerException -> _searchProductState.emit(SearchProductState.ServerError)
+            else -> _searchProductState.emit(SearchProductState.UnknownError)
+        }
+    }
+
+    private suspend fun handleSuccess(response: List<ProductEntity>) {
+        _searchProductState.emit(SearchProductState.HideLoading)
+        if (response.isEmpty()) _searchProductState.emit(SearchProductState.EmptyList)
+        else _searchProductState.emit(SearchProductState.NavigateToProductList(response))
+    }
+
     fun sendAction(action: SearchProductAction) = viewModelScope.launch {
         searchProductIntent.send(action)
     }

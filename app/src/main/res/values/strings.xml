@@ -7,4 +7,5 @@
     <string name="navigate_back">Navigate back</string>
     <string name="image_description">Image description</string>
     <string name="label_available_quantity">(%s Disponibles)</string>
+    <string name="query_not_found">No se encontraron resultados a tu busqueda</string>
 </resources>

@@ -89,10 +89,18 @@ class SearchProductFragment : Fragment() {
                         SearchProductState.ServerError -> showServerError()
                         SearchProductState.ShowLoading -> showLoading()
                         SearchProductState.UnknownError -> showUnknownError()
+                        SearchProductState.EmptyList -> handleEmptyList()
                     }
                 }
             }
         }
+    }
+
+    private fun handleEmptyList() {
+        binding.progressBarLoading.isVisible = false
+        binding.layoutSearchProduct.isVisible = true
+        Toast.makeText(context, getString(R.string.query_not_found), Toast.LENGTH_SHORT)
+            .show()
     }
 
     private fun showErrorInput() {
