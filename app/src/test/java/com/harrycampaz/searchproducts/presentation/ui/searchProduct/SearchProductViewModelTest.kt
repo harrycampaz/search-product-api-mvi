@@ -32,13 +32,12 @@ class SearchProductViewModelTest {
 
     @Before
     fun setup() {
-        MockKAnnotations.init(this)
         viewModel = SearchProductViewModel(useCase)
     }
 
 
     @Test
-    fun `when queryText is valid THEN show Loading State`() = coroutinesTestRule.runTest() {
+    fun `when queryText is valid THEN show Loading State`() = coroutinesTestRule.runTest {
         // Given
         viewModel.queryText.value = "gasghga"
 
@@ -62,7 +61,7 @@ class SearchProductViewModelTest {
     }
 
     @Test
-    fun `when queryText is blank then show error input`() = coroutinesTestRule.runTest() {
+    fun `when queryText is blank then show error input`() = coroutinesTestRule.runTest {
         // Given
         viewModel.queryText.value = ""
 

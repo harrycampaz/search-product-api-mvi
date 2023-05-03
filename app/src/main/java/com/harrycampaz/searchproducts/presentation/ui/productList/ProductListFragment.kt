@@ -1,22 +1,16 @@
 package com.harrycampaz.searchproducts.presentation.ui.productList
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.harrycampaz.searchproducts.databinding.FragmentProductListBinding
 import com.harrycampaz.searchproducts.presentation.ui.productList.adapter.ProductListAdapter
-import com.harrycampaz.searchproducts.presentation.ui.searchProduct.SearchProductFragmentDirections
 import com.harrycampaz.searchproducts.presentation.ui.searchProduct.viewobject.ProductViewObject
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -59,10 +53,12 @@ class ProductListFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.productListState.collectLatest { state ->
                 when (state) {
-                    is ProductListViewModel.ProductListState.InitView -> {
+                    ProductListViewModel.ProductListState.InitView -> {
                         initView(args.listProduct.products)
                     }
-                    ProductListViewModel.ProductListState.GoToDetail -> {}
+                    is ProductListViewModel.ProductListState.GoToDetail -> {
+                        navigateToDetailsProduct(state.productViewObject)
+                    }
                 }
             }
         }
@@ -81,6 +77,16 @@ class ProductListFragment : Fragment() {
     }
 
     private fun clickItem(productViewObject: ProductViewObject) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.sendAction(
+                ProductListViewModel.ProductListAction.NavigateToDetail(
+                    productViewObject
+                )
+            )
+        }
+    }
+
+    private fun navigateToDetailsProduct(productViewObject: ProductViewObject) {
         val action =
             ProductListFragmentDirections.actionProductListFragmentToDetailsProductFragment(
                 productViewObject
